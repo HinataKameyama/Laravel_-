@@ -4,23 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\CaloriesLog;
 use App\Models\SelectDish;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
 class SelectDishController extends Controller
 {
-    // 料理一覧をb_04_01_dishesテーブルから取得する
+    //料理の選択肢をテーブルから取得し、料理選択画面に表示させる
     public function create()
     {
         //カテゴリごとに料理を取得
-        $stapleDishes = SelectDish::where('category', '主食')->get();
-        $mainDishes = SelectDish::where('category', '主菜')->get();
-        $sideDishes = SelectDish::where('category', '副菜')->get();
+        $stapleDishes = SelectDish::where('category_id', '1')->get();
+        $mainDishes = SelectDish::where('category_id', '2')->get();
+        $sideDishes = SelectDish::where('category_id', '3')->get();
 
         return view('selectdish.create', compact('stapleDishes','mainDishes','sideDishes'));
     }
     
+    //選択した料理をテーブル保存し、結果表示画面に表示させる
     public function store(Request $request)
     {
         //POSTされた料理を受け取る
@@ -31,7 +33,8 @@ class SelectDishController extends Controller
         $comment = $request['comment'];
 
         //選択した料理、カロリー、カテゴリをb_04_01_dishesテーブルから取得する
-        $selectedAll = SelectDish::where('name', $selectedStaple) //主食
+        $selectedAll = SelectDish::join('b_04_01_category', 'b_04_01_dishes.category_id', '=', 'b_04_01_category.id')
+            ->where('name', $selectedStaple) //主食
             ->orWhere('name', $selectedMain) //主菜
             ->orWhere('name', $selectedSide) //副菜
             ->get();
@@ -83,5 +86,15 @@ class SelectDishController extends Controller
 
     }
     
-    
+    //料理データをテーブルから取得し、メニュー管理画面に表示させる
+    public function index()
+    {
+        $dishes = SelectDish::join('b_04_01_category', 'b_04_01_dishes.category_id', '=', 'b_04_01_category.id')
+                ->orderBy('category_id','ASC')
+                ->orderBy('calories','ASC')
+                ->get()
+                ->groupBy('category');
+                
+        return view('selectdish.menu',compact('dishes'));
+    }
 }

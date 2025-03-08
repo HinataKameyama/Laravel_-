@@ -13,15 +13,10 @@ class DatabaseSeeder extends Seeder
      */
 
     public function run()
-    {
-        //app7
-        $this->call([
-            NoteSeeder::class,
-        ]);
-        
+    {        
         //b-04-01
         $this->call([
-            SelectDishSeeder::class,
+            CategorySeeder::class,
         ]);
     }
 

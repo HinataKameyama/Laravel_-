@@ -26,6 +26,12 @@ h1 {
     color: #333;
 }
 
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+
 .btn-back {
     text-align: center;
     margin: 20px auto;
