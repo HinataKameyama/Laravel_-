@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\CaloriesLog;
 use App\Models\SelectDish;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,7 +32,7 @@ class SelectDishController extends Controller
         $comment = $request['comment'];
 
         //選択した料理、カロリー、カテゴリをb_04_01_dishesテーブルから取得する
-        $selectedAll = SelectDish::join('b_04_01_category', 'b_04_01_dishes.category_id', '=', 'b_04_01_category.id')
+        $selectedAll = SelectDish::join('b_04_01_category', 'b_04_01_dishes.category_id', '=', 'b_04_01_category.category_id')
             ->where('name', $selectedStaple) //主食
             ->orWhere('name', $selectedMain) //主菜
             ->orWhere('name', $selectedSide) //副菜

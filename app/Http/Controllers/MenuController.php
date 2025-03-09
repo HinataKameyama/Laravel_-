@@ -10,8 +10,7 @@ class MenuController extends Controller
     //料理データをテーブルから取得し、メニュー管理画面に表示させる
     public function index()
     {
-        $dishes = SelectDish::join('b_04_01_category', 'b_04_01_dishes.category_id', '=', 'b_04_01_category.id')
-                ->orderBy('category_id','ASC')
+        $dishes = SelectDish::join('b_04_01_category', 'b_04_01_dishes.category_id', '=', 'b_04_01_category.category_id')
                 ->orderBy('calories','ASC')
                 ->get()
                 ->groupBy('category');
@@ -25,7 +24,6 @@ class MenuController extends Controller
     //メニューを保存
     public function store(Request $request)
     {
-
           //モデルからインスタンスを生成
         $newDish = new SelectDish();  //任意の変数名 = new 連携するデータベースのモデル名;
           //category_idカラムにカテゴリIDを代入
@@ -40,4 +38,15 @@ class MenuController extends Controller
         return redirect()->route('selectdish.menu')->with('status', 'メニューが保存されました！');
     }
 
+    // メニューを削除
+    public function destroy($id)
+    {
+          // 指定したIDのメニューを取得。ない場合は404エラーを表示
+        $dish = SelectDish::findOrFail($id);
+          // データを物理削除
+        $dish->delete();
+
+        // 削除後にメニュー一覧にリダイレクト
+        return redirect()->route('selectdish.menu')->with('status', 'メニューが削除されました！');
+    }    
 }

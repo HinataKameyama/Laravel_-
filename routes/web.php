@@ -51,4 +51,6 @@ Route::post('/selectdish', [SelectDishController::class, 'store'])->name('select
 Route::get('/selectdish/menu', [MenuController::class, 'index'])->name('selectdish.menu');
 //メニューを新規追加しDBに保存
 Route::post('/selectdish/menu', [MenuController::class, 'store'])->name('selectdish.menu');
+//メニューを削除
+Route::delete('selectdish/menu/{id}', [MenuController::class, 'destroy'])->name('selectdish.menu');
 

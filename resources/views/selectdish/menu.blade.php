@@ -14,6 +14,8 @@
                         <tr>
                             <th>メニュー</th>
                             <th>カロリー</th>
+                            <th>編集</th>
+                            <th>削除</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -21,6 +23,14 @@
                             <tr>
                                 <td>{{ $dish -> name }}</td>
                                 <td>{{ $dish -> calories }}</td>
+                                <td><a class="uk-button uk-button-default" href="#">編集</a></td>
+                                <td>
+                                    <form action="{{ route('selectdish.menu', $dish->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="uk-button uk-button-danger" onclick="return confirm('本当に削除しますか？')">削除</button>
+                                    </form>                       
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -42,7 +52,7 @@
                     <select name="category_id" id="category_id">
                     <option value="" required>選択してください。</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->category }}</option>
+                            <option value="{{ $category->category_id }}">{{ $category->category }}</option>
                         @endforeach
                     </select>
             </div>
