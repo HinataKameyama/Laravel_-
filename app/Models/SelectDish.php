@@ -13,6 +13,11 @@ class SelectDish extends Model
     // テーブル名を明示的に指定
     protected $table = 'b_04_01_dishes';
     
+    // データベースに保存するフィールドを指定
+    protected $fillable = ['category_id','name','calories'];
+
+    // タイムスタンプを無効化
+    public $timestamps = false;
 
 }
 

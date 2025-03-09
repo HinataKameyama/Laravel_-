@@ -42,11 +42,13 @@
 //b-04-01
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SelectDishController;
+use App\Http\Controllers\MenuController;
 //料理の選択画面を表示
 Route::get('/selectdish/create', [SelectDishController::class, 'create'])->name('selectdish.create');
 //合計カロリーをDBに保存
 Route::post('/selectdish', [SelectDishController::class, 'store'])->name('selectdish.result');
-//メニュー一覧を表示
-Route::get('/selectdish/menu', [SelectDishController::class, 'index'])->name('selectdish.menu');
-
+//メニュー一覧、カテゴリ一覧を取得
+Route::get('/selectdish/menu', [MenuController::class, 'index'])->name('selectdish.menu');
+//メニューを新規追加しDBに保存
+Route::post('/selectdish/menu', [MenuController::class, 'store'])->name('selectdish.menu');
 

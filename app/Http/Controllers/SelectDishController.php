@@ -72,29 +72,14 @@ class SelectDishController extends Controller
           //resultカラムに合計カロリーを代入
         $caloriesLog->result = $totalCalorie;
           //commentカラムにコメントを代入
-        $caloriesLog->comment = $comment;
-      
-        //保存
+        $caloriesLog->comment = $comment;      
+          //保存
         $caloriesLog->save();
-        
-
-         
+                 
         return view('selectdish.result', 
         compact('selectedStaple','selectedMain','selectedSide',
         'selectedAll','selectedCalories','totalCalorie','comment',
         'msgTotalCalorie','msgCategory','msgComment'));
-
     }
     
-    //料理データをテーブルから取得し、メニュー管理画面に表示させる
-    public function index()
-    {
-        $dishes = SelectDish::join('b_04_01_category', 'b_04_01_dishes.category_id', '=', 'b_04_01_category.id')
-                ->orderBy('category_id','ASC')
-                ->orderBy('calories','ASC')
-                ->get()
-                ->groupBy('category');
-                
-        return view('selectdish.menu',compact('dishes'));
-    }
 }
