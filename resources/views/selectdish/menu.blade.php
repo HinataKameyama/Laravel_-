@@ -25,10 +25,10 @@
                                 <td>{{ $dish -> calories }}</td>
                                 <td><a class="uk-button uk-button-default" href="#">編集</a></td>
                                 <td>
-                                    <form action="{{ route('selectdish.menu', $dish->id) }}" method="POST">
+                                    <form action="{{ route('selectdish.destroy', $dish->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="uk-button uk-button-danger" onclick="return confirm('本当に削除しますか？')">削除</button>
+                                        <button type="submit" class="uk-button uk-button-default" onclick="return confirm('本当に削除しますか？')">削除</button>
                                     </form>                       
                                 </td>
                             </tr>

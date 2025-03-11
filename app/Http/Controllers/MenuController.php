@@ -11,6 +11,7 @@ class MenuController extends Controller
     public function index()
     {
         $dishes = SelectDish::join('b_04_01_category', 'b_04_01_dishes.category_id', '=', 'b_04_01_category.category_id')
+                ->orderBy('b_04_01_dishes.category_id','ASC')
                 ->orderBy('calories','ASC')
                 ->get()
                 ->groupBy('category');
