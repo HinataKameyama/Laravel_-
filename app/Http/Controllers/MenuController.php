@@ -49,5 +49,30 @@ class MenuController extends Controller
 
         // 削除後にメニュー一覧にリダイレクト
         return redirect()->route('selectdish.menu')->with('status', 'メニューが削除されました！');
-    }    
+    }   
+    
+    // 指定した料理の編集画面を表示する
+    public function edit($id)
+    {
+        // 料理情報を取得
+        $dishes = SelectDish::join('b_04_01_category', 'b_04_01_dishes.category_id', '=', 'b_04_01_category.category_id')
+        ->orderBy('b_04_01_dishes.category_id', 'ASC')
+        ->orderBy('calories', 'ASC')
+        ->get();
+
+        // 指定されたIDの料理情報を取得
+        $editDish = $dishes->where('id', $id)->first();
+
+        if (!$editDish) {
+        abort(404); // データがない場合は 404 エラーを返す
+        }
+
+        // カテゴリ一覧を取得
+        $categories = Category::all();
+
+        // edit画面にデータを渡す
+        return view('selectdish.edit', compact('editDish', 'categories'));
+    }
+
+
 }

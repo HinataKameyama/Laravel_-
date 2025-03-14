@@ -53,4 +53,8 @@ Route::get('/selectdish/menu', [MenuController::class, 'index'])->name('selectdi
 Route::post('/selectdish/menu', [MenuController::class, 'store'])->name('selectdish.menu');
 //メニューを削除
 Route::delete('selectdish/menu/{id}', [MenuController::class, 'destroy'])->name('selectdish.destroy');
+//選択したメニューを編集画面に表示
+Route::get('/selectdish/edit/{id}', [MenuController::class, 'edit'])->name('selectdish.edit');
+//メニューを更新
+Route::put('selectdish/update/{id}', [MenuController::class, 'update'])->name('selectdish.update');
 
