@@ -70,9 +70,31 @@ class MenuController extends Controller
         // カテゴリ一覧を取得
         $categories = Category::all();
 
-        // edit画面にデータを渡す
+        // メニュー更新画面にデータを渡す
         return view('selectdish.edit', compact('editDish', 'categories'));
     }
 
-
+    public function update(Request $request, $id)
+    {
+      //バリデーションでデータ不整合の場合に自動エラーメッセージを表示
+      $validated = $request->validate([
+        'category_id' => 'required|integer', 
+        'name' => 'required|string', 
+        'calories' => 'required|regex:/^\d+$/', 
+      ]);
+    
+    
+      // 指定されたIDのメニューを取得
+      $updateDish = SelectDish::findOrFail($id);
+    
+      // メニュー情報を更新
+      $updateDish->update([
+          'category_id' => $validated['category_id'],
+          'name' => $validated['name'],
+          'calories' => $validated['calories'],
+      ]);
+    
+      // 更新後にリダイレクト
+      return redirect()->route('selectdish.menu')->with('status', 'メニューが保存されました！');
+    }
 }
