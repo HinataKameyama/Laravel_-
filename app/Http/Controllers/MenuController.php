@@ -25,17 +25,24 @@ class MenuController extends Controller
     //メニューを保存
     public function store(Request $request)
     {
-          //モデルからインスタンスを生成
-        $newDish = new SelectDish();  //任意の変数名 = new 連携するデータベースのモデル名;
-          //category_idカラムにカテゴリIDを代入
-        $newDish->category_id = $request->category_id;
-          //nameカラムに料理名を代入
-        $newDish->name = $request->name;
-          //caloriesカラムにカロリーを代入
-        $newDish->calories = $request->calories;        
-          //保存
+        // バリデーションを適用
+        $validated = $request->validate([
+            'category_id' => 'required|integer', 
+            'name' => 'required|string', 
+            'calories' => 'required|regex:/^\d+$/', 
+        ]);
+      
+        // モデルからインスタンスを生成
+        $newDish = new SelectDish();
+      
+        // バリデーション済みのデータを代入
+        $newDish->category_id = $validated['category_id'];
+        $newDish->name = $validated['name'];
+        $newDish->calories = $validated['calories'];
+      
+        // 保存
         $newDish->save();
-
+      
         return redirect()->route('selectdish.menu')->with('status', 'メニューが保存されました！');
     }
 

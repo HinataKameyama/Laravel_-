@@ -39,9 +39,20 @@
 
     <!--料理を新規追加-->
     <h1>新規追加</h1>
-        <!--メニューが保存できた場合にメッセージを表示-->
+        <!--メニューが保存できた場合のメッセージ表示-->
         @if (session('status'))
             <p>{{ session('status') }}</p>
+        @endif
+
+        <!--メニューの更新内容がレイアウトに沿っていない場合のエラーメッセージ表示-->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
 
         <!--メニュー新規追加フォーム-->
