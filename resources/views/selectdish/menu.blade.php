@@ -8,7 +8,7 @@
     <h1>メニュー一覧</h1>
         <!--カテゴリごとに料理とカロリーをテーブル表示-->
         @foreach ($dishes as $category => $items)
-            <h2>{{ $category }}</h2> {{-- カテゴリ名を見出しとして表示 --}}
+            <h2>{{ $category }}</h2> <!-- カテゴリ名を見出しとして表示 -->
                 <table>
                     <thead>
                         <tr>

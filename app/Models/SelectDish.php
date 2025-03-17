@@ -10,14 +10,27 @@ class SelectDish extends Model
 {
     use HasFactory;
 
-    // テーブル名を明示的に指定
-    protected $table = 'b_04_01_dishes';
-    
-    // データベースに保存するフィールドを指定
-    protected $fillable = ['category_id','name','calories'];
+    protected $table = 'b_04_01_dishes';  // テーブル名を明示的に指定
+    protected $fillable = ['category_id', 'name', 'calories'];  // データベースに保存するフィールドを指定
+    public $timestamps = false;  // タイムスタンプを無効化
 
-    // タイムスタンプを無効化
-    public $timestamps = false;
+    //メニュー一覧を取得
+    public static function getAllDishes()
+    {
+        return self::join('b_04_01_category', 'b_04_01_dishes.category_id', '=', 'b_04_01_category.category_id')
+            ->orderBy('b_04_01_dishes.category_id', 'ASC')
+            ->orderBy('calories', 'ASC')
+            ->get();
+    }
 
+    //メニュー一覧をカテゴリごとにグループ化
+    public static function getGroupedDishes()
+    {
+        return self::join('b_04_01_category', 'b_04_01_dishes.category_id', '=', 'b_04_01_category.category_id')
+            ->orderBy('b_04_01_dishes.category_id', 'ASC')
+            ->orderBy('calories', 'ASC')
+            ->get()
+            ->groupBy('category');
+    }
 }
 

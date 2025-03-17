@@ -12,12 +12,13 @@
 
     <form action="/selectdish" method="POST">
     @csrf
+    @foreach ($dishes as $category => $items)
     	<div>
             <label for="dish">主食:</label>
             <select name="stapleDish" id="dish">
                     <option value="" selected>選択してください。</option>
-                @foreach ($stapleDishes as $stapleDish)
-                    <option value="{{ $stapleDish->name }}">{{ $stapleDish->name }}</option>
+                @foreach ($items as $dish)
+                    <option value="{{ $dish->name }}">{{ $dish->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -26,8 +27,8 @@
             <label for="dish">主菜:</label>
             <select name="mainDish" id="dish">
                     <option value="" selected>選択してください。</option>
-                @foreach ($mainDishes as $mainDish)
-                    <option value="{{ $mainDish->name }}">{{ $mainDish->name }}</option>
+                @foreach ($items as $dish)
+                    <option value="{{ $dish->name }}">{{ $dish->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -36,12 +37,12 @@
             <label for="dish">副菜:</label>
             <select name="sideDish" id="dish">
                     <option value="" selected>選択してください。</option>
-                @foreach ($sideDishes as $sideDish)
-                    <option value="{{ $sideDish->name }}">{{ $sideDish->name }}</option>
+                @foreach ($items as $dish)
+                    <option value="{{ $dish->name }}">{{ $dish->name }}</option>
                 @endforeach
             </select>
         </div>
-
+    @endforeach
         <div>
             <label for="comment">コメント:</label>
             <textarea name="comment" id="comment" rows="4"></textarea>

@@ -10,16 +10,11 @@ class MenuController extends Controller
     //料理データをテーブルから取得し、メニュー管理画面に表示させる
     public function index()
     {
-        $dishes = SelectDish::join('b_04_01_category', 'b_04_01_dishes.category_id', '=', 'b_04_01_category.category_id')
-                ->orderBy('b_04_01_dishes.category_id','ASC')
-                ->orderBy('calories','ASC')
-                ->get()
-                ->groupBy('category');
+        // モデルのメソッドを呼び出す
+        $dishes = SelectDish::getGroupedDishes();  //カテゴリごとのメニュー一覧
+        $categories = Category::getAllCategories();  //カテゴリ一覧
 
-    //b_04_01_categoryテーブルからカテゴリを取得し、メニュー追加フォームに表示
-        $categories = Category::all();
-                
-        return view('selectdish.menu',compact('dishes','categories'));
+        return view('selectdish.menu', compact('dishes', 'categories'));
     }
 
     //メニューを保存
@@ -61,21 +56,17 @@ class MenuController extends Controller
     // 指定した料理の編集画面を表示する
     public function edit($id)
     {
-        // 料理情報を取得
-        $dishes = SelectDish::join('b_04_01_category', 'b_04_01_dishes.category_id', '=', 'b_04_01_category.category_id')
-        ->orderBy('b_04_01_dishes.category_id', 'ASC')
-        ->orderBy('calories', 'ASC')
-        ->get();
+        // モデルからメソッドを呼び出す
+        $dishes = SelectDish::getAllDishes();   //メニュー一覧
+        $categories = Category::getAllCategories();  //カテゴリ一覧
 
         // 指定されたIDの料理情報を取得
         $editDish = $dishes->where('id', $id)->first();
 
+        // データがない場合は 404 エラーを返す
         if (!$editDish) {
-        abort(404); // データがない場合は 404 エラーを返す
+        abort(404);
         }
-
-        // カテゴリ一覧を取得
-        $categories = Category::all();
 
         // メニュー更新画面にデータを渡す
         return view('selectdish.edit', compact('editDish', 'categories'));
@@ -89,7 +80,6 @@ class MenuController extends Controller
         'name' => 'required|string', 
         'calories' => 'required|regex:/^\d+$/', 
       ]);
-    
     
       // 指定されたIDのメニューを取得
       $updateDish = SelectDish::findOrFail($id);
