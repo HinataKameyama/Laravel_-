@@ -57,11 +57,8 @@ class MenuController extends Controller
     public function edit($id)
     {
         // モデルからメソッドを呼び出す
-        $dishes = SelectDish::getAllDishes();   //メニュー一覧
+        $editDish = SelectDish::getSelectedDish($id);  // 指定されたIDの料理情報を取得
         $categories = Category::getAllCategories();  //カテゴリ一覧
-
-        // 指定されたIDの料理情報を取得
-        $editDish = $dishes->where('id', $id)->first();
 
         // データがない場合は 404 エラーを返す
         if (!$editDish) {
@@ -81,8 +78,8 @@ class MenuController extends Controller
         'calories' => 'required|regex:/^\d+$/', 
       ]);
     
-      // 指定されたIDのメニューを取得
-      $updateDish = SelectDish::findOrFail($id);
+      //モデルからメソッドを呼び出す
+      $updateDish = SelectDish::getSelectedDish($id);  // 指定されたIDの料理情報を取得
     
       // メニュー情報を更新
       $updateDish->update([

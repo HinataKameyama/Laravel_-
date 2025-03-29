@@ -13,9 +13,12 @@ class SelectDishController extends Controller
     //料理の選択肢をテーブルから取得し、料理選択画面に表示させる
     public function create()
     {
-      $dishes = SelectDish::getGroupedDishes();  //カテゴリごとのメニュー一覧
+        // モデルのメソッドを呼び出す
+        $stapleDishes = SelectDish::getStapleDishes(); //主食
+        $mainDishes = SelectDish::getMainDishes(); //主菜
+        $sideDishes = SelectDish::getSideDishes(); //副菜
 
-        return view('selectdish.create', compact('dishes'));
+        return view('selectdish.create', compact('stapleDishes','mainDishes','sideDishes'));
     }
     
     //選択した料理をテーブル保存し、結果表示画面に表示させる

@@ -5,26 +5,42 @@
 <html lang="ja">
 <body>
     <h1>献立入力</h1>
-        {{-- フラッシュメッセージ --}}
+        <!-- フラッシュメッセージ -->
         @if (session('status'))
         <p>{{ session('status') }}</p>
         @endif
 
     <form action="/selectdish" method="POST">
     @csrf
-    {{-- カテゴリごとにメニュー選択欄を表示 --}}
-    @foreach ($dishes as $category => $items)
     	<div>
-            <label for="dish">{{ $category }}:</label>
-            <select name="category" id="dish">
+            <label for="dish">主食:</label>
+            <select name="stapleDish" id="dish">
                     <option value="" selected>選択してください。</option>
-                @foreach ($items as $dish)
-                    <option value="{{ $dish->name }}">{{ $dish->name }}</option>
+                @foreach ($stapleDishes as $stapleDish)
+                    <option value="{{ $stapleDish->name }}">{{ $stapleDish->name }} ({{ $stapleDish->calories }}kcal)</option>
                 @endforeach
             </select>
         </div>
-    @endforeach
 
+        <div>
+            <label for="dish">主菜:</label>
+            <select name="mainDish" id="dish">
+                    <option value="" selected>選択してください。</option>
+                @foreach ($mainDishes as $mainDish)
+                    <option value="{{ $mainDish->name }}">{{ $mainDish->name }} ({{ $mainDish->calories }}kcal)</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div>
+            <label for="dish">副菜:</label>
+            <select name="sideDish" id="dish">
+                    <option value="" selected>選択してください。</option>
+                @foreach ($sideDishes as $sideDish)
+                    <option value="{{ $sideDish->name }}">{{ $sideDish->name }} ({{ $sideDish->calories }}kcal)</option>
+                @endforeach
+            </select>
+        </div>
         <div>
             <label for="comment">コメント:</label>
             <textarea name="comment" id="comment" rows="4"></textarea>
