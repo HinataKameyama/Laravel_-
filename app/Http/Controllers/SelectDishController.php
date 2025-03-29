@@ -65,15 +65,8 @@ class SelectDishController extends Controller
         //コメントが入力されていない場合、メッセージを表示
         $msgComment = (!$comment) ? "コメントが入力されていません。" : "";
                 
-        //選択した料理の合計カロリーとコメントをb_04_01_calories_logテーブルに保存
-          //モデルからインスタンスを生成
-        $caloriesLog = new CaloriesLog();  //任意の変数名 = new 連携するデータベースのモデル名;
-          //resultカラムに合計カロリーを代入
-        $caloriesLog->result = $totalCalorie;
-          //commentカラムにコメントを代入
-        $caloriesLog->comment = $comment;      
-          //保存
-        $caloriesLog->save();
+        // 合計カロリーとコメントを保存b_04_01_calories_logテーブルに保存
+        $caloriesLog = CaloriesLog::saveCaloriesLog($totalCalorie, $comment);
                  
         return view('selectdish.result', 
         compact('selectedStaple','selectedMain','selectedSide',
