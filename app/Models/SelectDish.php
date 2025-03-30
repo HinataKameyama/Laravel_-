@@ -45,12 +45,57 @@ class SelectDish extends Model
             ->groupBy('category');
     }
 
+    /**
+     * 新しいメニューを保存する
+     *
+     * @param integer $newCategoryID カテゴリID
+     * @param string $newName 料理名
+     * @param float $newCalories カロリー
+     * @return \App\Models\SelectDish
+     */
+    
+    public static function saveNewDish($newCategoryID,$newName,$newCalories)
+    {
+        // 新しいインスタンスを生成し、データをセット
+        $newDish = new self();
+        $newDish->category_id = $newCategoryID;
+        $newDish->name = $newName;
+        $newDish->calories = $newCalories;
+        
+        // 保存
+        $newDish->save();
+
+        return $newDish;
+    }
+
     //IDで指定したメニューの情報を取得
-    public static function getSelectedDish($id)
+    public static function getDishByID($id)
     {
         return self::join('b_04_01_category', 'b_04_01_dishes.category_id', '=', 'b_04_01_category.category_id')
             ->where('id', $id)
             ->first();
+    }
+
+    //料理名で指定したメニューの情報を取得
+    public static function getDishByName($selectedStaple,$selectedMain,$selectedSide)
+    {
+        return self::join('b_04_01_category', 'b_04_01_dishes.category_id', '=', 'b_04_01_category.category_id')
+            ->where('name', $selectedStaple) //主食
+            ->orWhere('name', $selectedMain) //主菜
+            ->orWhere('name', $selectedSide) //副菜
+            ->get();
+    }
+
+    /**
+     * 指定された料理のデータを更新
+     * 
+     * @param int $id 更新する料理のID
+     * @param array $data 更新データ
+     * @return bool 更新成功: true / 失敗: false
+     */
+    public static function updateDish($id, $data)
+    {
+        return self::where('id', $id)->update($data);
     }
 }
 

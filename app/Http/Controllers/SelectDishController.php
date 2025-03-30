@@ -31,12 +31,8 @@ class SelectDishController extends Controller
         //POSTされたコメントを受け取る
         $comment = $request['comment'];
 
-        //選択した料理、カロリー、カテゴリをb_04_01_dishesテーブルから取得する
-        $selectedAll = SelectDish::join('b_04_01_category', 'b_04_01_dishes.category_id', '=', 'b_04_01_category.category_id')
-            ->where('name', $selectedStaple) //主食
-            ->orWhere('name', $selectedMain) //主菜
-            ->orWhere('name', $selectedSide) //副菜
-            ->get();
+        //料理名で指定したメニューの情報を取得
+        $selectedAll = SelectDish::getDishByName($selectedStaple,$selectedMain,$selectedSide);
 
         //カロリーだけを抜き出す
         $selectedCalories = $selectedAll->pluck('calories');

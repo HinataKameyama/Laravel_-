@@ -20,34 +20,24 @@ class MenuController extends Controller
     //メニューを保存
     public function store(Request $request)
     {
-        // バリデーションを適用
-        $validated = $request->validate([
-            'category_id' => 'required|integer', 
-            'name' => 'required|string', 
-            'calories' => 'required|regex:/^\d+$/', 
-        ]);
+        //POSTされたデータを受け取る
+        $newCategoryID = $request['category_id'];
+        $newName = $request['name'];
+        $newCalories = $request['calories'];
       
-        // モデルからインスタンスを生成
-        $newDish = new SelectDish();
-      
-        // バリデーション済みのデータを代入
-        $newDish->category_id = $validated['category_id'];
-        $newDish->name = $validated['name'];
-        $newDish->calories = $validated['calories'];
-      
-        // 保存
-        $newDish->save();
-      
+        //b_04_01_dishesテーブルに保存
+        $newDish = SelectDish::saveNewDish($newCategoryID,$newName,$newCalories);
+
         return redirect()->route('selectdish.menu')->with('status', 'メニューが保存されました！');
     }
 
     // メニューを削除
     public function destroy($id)
     {
-          // 指定したIDのメニューを取得。ない場合は404エラーを表示
-        $dish = SelectDish::findOrFail($id);
-          // データを物理削除
-        $dish->delete();
+        // 指定されたIDの料理情報を取得
+        $deleteDish = SelectDish::getDishByID($id); 
+        // メニュー情報をDBから削除
+        $deleteDish->delete();
 
         // 削除後にメニュー一覧にリダイレクト
         return redirect()->route('selectdish.menu')->with('status', 'メニューが削除されました！');
@@ -57,7 +47,7 @@ class MenuController extends Controller
     public function edit($id)
     {
         // モデルからメソッドを呼び出す
-        $editDish = SelectDish::getSelectedDish($id);  // 指定されたIDの料理情報を取得
+        $editDish = SelectDish::getDishByID($id);  // 指定されたIDの料理情報を取得
         $categories = Category::getAllCategories();  //カテゴリ一覧
 
         // データがない場合は 404 エラーを返す
@@ -69,26 +59,29 @@ class MenuController extends Controller
         return view('selectdish.edit', compact('editDish', 'categories'));
     }
 
+    // 指定した料理の編集内容を上書き保存する
     public function update(Request $request, $id)
     {
-      //バリデーションでデータ不整合の場合に自動エラーメッセージを表示
-      $validated = $request->validate([
-        'category_id' => 'required|integer', 
-        'name' => 'required|string', 
-        'calories' => 'required|regex:/^\d+$/', 
-      ]);
+        //POSTされたデータを受け取る
+        $modifiedCategoryID = $request['category_id'];
+        $modifiedName = $request['name'];
+        $modifiedCalories = $request['calories'];
     
-      //モデルからメソッドを呼び出す
-      $updateDish = SelectDish::getSelectedDish($id);  // 指定されたIDの料理情報を取得
-    
-      // メニュー情報を更新
-      $updateDish->update([
-          'category_id' => $validated['category_id'],
-          'name' => $validated['name'],
-          'calories' => $validated['calories'],
-      ]);
-    
-      // 更新後にリダイレクト
-      return redirect()->route('selectdish.menu')->with('status', 'メニューが保存されました！');
+        // 更新データの配列を作成
+        $updateData = [
+          'category_id' => $modifiedCategoryID,
+          'name' => $modifiedName,
+          'calories' => $modifiedCalories,
+        ];
+        
+        // 指定されたIDの料理情報を更新
+        $updated = SelectDish::updateDish($id, $updateData);
+        
+        // 更新結果によって処理を分岐
+        if ($updated) {
+          return redirect()->route('selectdish.menu')->with('status', '料理情報が更新されました！');
+        } else {
+          return redirect()->route('selectdish.menu')->with('status', '更新に失敗しました。');
+        }
     }
 }
