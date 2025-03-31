@@ -1,9 +1,7 @@
 @extends('layouts.app')
 @section('title', '料理選択画面') 
 
-<!DOCTYPE html>
-<html lang="ja">
-<body>
+@section('content')
     <h1>献立入力</h1>
         <!-- フラッシュメッセージ -->
         @if (session('status'))
@@ -48,5 +46,4 @@
 
         <button class="uk-button uk-button-primary" type="submit">結果を表示</button>
     </form>
-</body>
-</html>
+@endsection
