@@ -1,9 +1,7 @@
 @extends('layouts.app')
 @section('title', 'メニュー編集画面') 
 
-<!DOCTYPE html>
-<html lang="ja">
-<body>
+@section('content')
     <h1>メニュー更新</h1>
     <!--メニューの更新内容がレイアウトに沿っていない場合にエラーメッセージを表示-->
         @if ($errors->any())
@@ -17,6 +15,7 @@
         @endif
 
     <!--メニュー更新フォーム-->
+    <div class="form">
         <form action="{{ route('selectdish.update', $editDish->id) }}" method="POST">
             @csrf
             @method('PUT')
@@ -40,7 +39,7 @@
                 <input name="calories" id="calories" value="{{ old('calories', $editDish->calories) }}" required></input>
             </div>
     
-            <button type="submit">更新</button>
+            <button class="uk-button uk-button-primary" type="submit">更新</button>
         </form>
-</body>
-</html>
+    </div>
+@endsection

@@ -83,6 +83,7 @@ class SelectDish extends Model
             ->where('name', $selectedStaple) //主食
             ->orWhere('name', $selectedMain) //主菜
             ->orWhere('name', $selectedSide) //副菜
+            ->orderBy('b_04_01_category.category_id')  //主食、主菜、副菜の順に並び変え
             ->get();
     }
 

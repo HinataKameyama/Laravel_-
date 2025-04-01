@@ -41,7 +41,7 @@
                         <tr>
                             <td>{{ $all -> category }}</td>
                             <td>{{ $all -> name }}</td>
-                            <td>{{ $all -> calories }}</td>
+                            <td>{{ $all -> calories }}kcal</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -55,6 +55,6 @@
             </div>
         <br>
 
-        <div class="uk-button uk-button-secondary" href="{{ asset('selectdish/create') }}">料理選択画面に戻る</div>
+        <a class="uk-button uk-button-secondary" href="{{ asset('selectdish/create') }}">料理選択画面に戻る</a>
     </div>
 @endsection

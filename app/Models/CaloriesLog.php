@@ -23,12 +23,12 @@ class CaloriesLog extends Model
      * @param string $comment コメント
      * @return \App\Models\CaloriesLog
      */
-    public static function saveCaloriesLog($totalCalorie, $comment)
+    public static function saveCaloriesLog($totalCalorie = null, $comment = null)
     {
         // 新しいインスタンスを生成し、データをセット
         $caloriesLog = new self();
-        $caloriesLog->result = $totalCalorie;
-        $caloriesLog->comment = $comment;
+        $caloriesLog->result = $totalCalorie ?? null;
+        $caloriesLog->comment = $comment ?? null;
 
         // 保存
         $caloriesLog->save();
