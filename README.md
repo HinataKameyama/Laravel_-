@@ -1,66 +1,82 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<!--シールド一覧-->
+<p>
+<img src="https://img.shields.io/badge/PHP-ccc.svg?logo=php&style=flat"> 
+<img src="https://img.shields.io/badge/-CSS-1572B6.svg"> 
+<img src="https://img.shields.io/badge/-HTML-333.svg">
+<img src="https://img.shields.io/badge/-Windows-0078D6.svg?logo=windows&style=flat">
+<img src="https://img.shields.io/badge/-MySQL-336791.svg?logo=mysql&style=flat">
+<img src="https://img.shields.io/badge/-Visual%20Studio%20Code-007ACC.svg?logo=visual-studio-code&style=flat">
+<img src="https://img.shields.io/badge/-GitHub-181717.svg?logo=github&style=flat">
+<img src="https://img.shields.io/badge/-Docker-EEE.svg?logo=docker&style=flat">
 </p>
 
-## About Laravel
+<!--画面イメージ-->
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 1.概要
+メニューを選択して献立の合計カロリーを算出します。メニューは新規追加や編集、削除が可能です。
+<br><br>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 2.機能要件
+- 料理選択機能
+  - DBに保存されたメニューを選択欄に表示させる。
+  - 主食、主菜、副菜を選択できる。
+ 
+- カロリー計算機能
+  - 選択した主食、主菜、副菜の合計カロリーを算出する。
 
-## Learning Laravel
+- 合計カロリー・コメント保存機能
+  - 合計カロリーとコメントをDBに保存する。
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- メニュー一覧表示機能
+  - DBに保存されたメニューをカテゴリごとに一覧で表示する。
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- メニュー追加・削除・編集機能
+  - メニューをDBに新規登録する。
+  - 選択したメニューをDBから削除する。
+  - 選択したメニューの情報を編集し、DBを更新する。
+<br><br>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 3.制作期間
+30日間
+<br><br>
 
-## Laravel Sponsors
+## 4.こだわったポイント
+- UIKitを導入し、統一感のあるレイアウトにしたこと。
+- DBの更新前に確認メッセージを表示させるようにしたこと。
+- 表示されるメニューを動的表示にして、DBの内容をリアルタイムで反映させていること。
+- 長い文章でレイアウトが崩れないようにしたこと。
+<br><br>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 5.仕様動作のイメージ
 
-### Premium Partners
+<br><br>
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## 6.機能一覧
+| 料理選択画面 |　結果表示画面 |
+| ---- | ---- |
+|  |  |
+| 主食、主菜、副菜をそれぞれの選択欄で指定します。コメントを自由に記入します。 | 合計カロリー、選択したメニュー、コメントを表示します。 |
 
-## Contributing
+| メニュー管理画面 |　メニュー編集画面 |
+| ---- | ---- |
+|  |  |
+| メニュー一覧をカテゴリごとに表示します。 | 選択したメニューを編集します。 |
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<br><br>
 
-## Code of Conduct
+## 7.使用技術
+| Category          | Technology Stack    | 
+| ----------------- | ------------------- | 
+| Frontend          | HTML, CSS（UIkit） | 
+| Backend           | PHP                 | 
+| Database          | phpMyAdmin          | 
+| Environment setup | Docker              | 
+| etc.              | Git, GitHub, vscode | 
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+<br><br>
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 8.今後の展望
+ - JavaScriptを使用し、メニュー追加・削除・編集機能を非同期処理にする。
+ - 過去の献立を記録し、一覧表示させる。
+ - ER図を掲載する。
