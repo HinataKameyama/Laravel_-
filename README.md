@@ -11,7 +11,7 @@
 </p>
 
 <!--画面イメージ-->
-
+![image](https://github.com/user-attachments/assets/80c33fb3-d2c3-42d4-a51a-2fe04ecadecb)
 
 ## 1.概要
 メニューを選択して献立の合計カロリーを算出します。メニューは新規追加や編集、削除が可能です。
