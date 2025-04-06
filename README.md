@@ -11,7 +11,7 @@
 </p>
 
 <!--画面イメージ-->
-![image](https://github.com/user-attachments/assets/80c33fb3-d2c3-42d4-a51a-2fe04ecadecb)
+![料理選択画面](https://github.com/user-attachments/assets/80c33fb3-d2c3-42d4-a51a-2fe04ecadecb)
 
 ## 1.概要
 メニューを選択して献立の合計カロリーを算出します。メニューは新規追加や編集、削除が可能です。
@@ -55,7 +55,7 @@
 ## 6.機能一覧
 | 料理選択画面 |　結果表示画面 |
 | ---- | ---- |
-|  |  |
+| ![料理選択画面_録画](https://github.com/user-attachments/assets/206a6430-9a75-40c1-8427-9f7697b408e8) |  |
 | 主食、主菜、副菜をそれぞれの選択欄で指定します。コメントを自由に記入します。 | 合計カロリー、選択したメニュー、コメントを表示します。 |
 
 | メニュー管理画面 |　メニュー編集画面 |
