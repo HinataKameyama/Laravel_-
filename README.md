@@ -49,23 +49,24 @@
 <br><br>
 
 ## 5.仕様動作のイメージ
-
-<br><br>
-
-## 6.機能一覧
-| 料理選択画面 |　結果表示画面 |
+| 料理選択機能 |　結果表示機能 |
 | ---- | ---- |
-| ![料理選択画面_録画](https://github.com/user-attachments/assets/206a6430-9a75-40c1-8427-9f7697b408e8) |  |
+| ![料理選択機能_録画](https://github.com/user-attachments/assets/206a6430-9a75-40c1-8427-9f7697b408e8) | ![結果表示機能_録画](https://github.com/user-attachments/assets/bd87b802-fea7-40cf-a4f7-7af880e3752a) |
 | 主食、主菜、副菜をそれぞれの選択欄で指定します。コメントを自由に記入します。 | 合計カロリー、選択したメニュー、コメントを表示します。 |
 
-| メニュー管理画面 |　メニュー編集画面 |
+| メニュー一覧表示機能 |　メニュー追加機能 |
 | ---- | ---- |
-|  |  |
-| メニュー一覧をカテゴリごとに表示します。 | 選択したメニューを編集します。 |
+| ![メニュー一覧表示機能_録画](https://github.com/user-attachments/assets/dc2303b8-5796-4881-ac2d-7c261619bc0c) | ![メニュー追加機能_録画](https://github.com/user-attachments/assets/61e35586-41c9-4df0-bb44-106b5d5978f7) |
+| メニュー一覧をカテゴリごとに表示します。 | メニューを新規登録します。 |
+
+| メニュー削除機能 |　メニュー編集機能 |
+| ---- | ---- |
+| ![メニュー削除機能_録画](https://github.com/user-attachments/assets/6109d38e-b97a-43f1-978b-dcca160eeddb)| ![メニュー編集機能_録画](https://github.com/user-attachments/assets/f10a880c-11e6-4e92-916c-016507f0c355) |
+| 選択したメニューを削除します。 | 選択したメニューを編集します。 |
 
 <br><br>
 
-## 7.使用技術
+## 6.使用技術
 | Category          | Technology Stack    | 
 | ----------------- | ------------------- | 
 | Frontend          | HTML, CSS（UIkit） | 
@@ -76,7 +77,7 @@
 
 <br><br>
 
-## 8.今後の展望
+## 7.今後の展望
  - JavaScriptを使用し、メニュー追加・削除・編集機能を非同期処理にする。
  - 過去の献立を記録し、一覧表示させる。
  - ER図を掲載する。
